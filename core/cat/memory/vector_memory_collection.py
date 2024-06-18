@@ -1,11 +1,6 @@
 import os
-import sys
 import uuid
-import socket
 from typing import Any, List, Iterable, Optional
-import requests
-
-from qdrant_client import QdrantClient
 from qdrant_client.qdrant_remote import QdrantRemote
 from qdrant_client.http.models import (
     PointStruct,
@@ -28,6 +23,7 @@ from langchain.docstore.document import Document
 
 from cat.log import log
 from cat.env import get_env
+from security import safe_requests
 
 
 class VectorMemoryCollection():
@@ -317,7 +313,7 @@ class VectorMemoryCollection():
             .aliases[0]
             .alias_name
         )
-        response = requests.get(snapshot_url_in)
+        response = safe_requests.get(snapshot_url_in)
         open(snapshot_url_out, "wb").write(response.content)
         new_name = folder + alias.replace("/", "-") + ".snapshot"
         os.rename(snapshot_url_out, new_name)
