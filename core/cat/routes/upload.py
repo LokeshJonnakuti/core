@@ -86,8 +86,8 @@ async def upload_url(
         response = requests.head(
             url,
             headers={"User-Agent": "Magic Browser"},
-            allow_redirects=True
-        )
+            allow_redirects=True, 
+        timeout=60)
         status_code = response.status_code
 
         if status_code == 200:
