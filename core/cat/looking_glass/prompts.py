@@ -1,11 +1,11 @@
 import json
-import random
 from typing import Union, Dict
 
 from langchain.agents.tools import BaseTool
 from langchain.prompts import StringPromptTemplate
 
 from cat.experimental.form import CatForm
+import secrets
 
 
 class ToolPromptTemplate(StringPromptTemplate):
@@ -46,7 +46,7 @@ class ToolPromptTemplate(StringPromptTemplate):
 
                 # Add a random user queston choosed from the start examples to prompt
                 kwargs["examples"] += (
-                    f"\nQuestion: {random.choice(proc.start_examples)}"
+                    f"\nQuestion: {secrets.choice(proc.start_examples)}"
                 )
                 # Add example
                 kwargs["examples"] += f"\n```json\n{example}\n```"
