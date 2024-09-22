@@ -1,6 +1,7 @@
 import requests
 
 from cat.log import log
+from security import safe_requests
 
 
 def get_registry_url():
@@ -37,7 +38,7 @@ async def registry_search_plugins(
                 "page": 1,
                 "page_size": 1000,
             }
-            response = requests.get(url, params=params)
+            response = safe_requests.get(url, params=params)
             
             # check the connection's status
             if response.status_code == 200:
