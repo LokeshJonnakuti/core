@@ -22,7 +22,7 @@ async def registry_search_plugins(
             payload = {
                 "query": query
             }
-            response = requests.post(url, json=payload)
+            response = requests.post(url, json=payload, timeout=60)
             
             # check the connection's status
             if response.status_code == 200:
@@ -37,7 +37,7 @@ async def registry_search_plugins(
                 "page": 1,
                 "page_size": 1000,
             }
-            response = requests.get(url, params=params)
+            response = requests.get(url, params=params, timeout=60)
             
             # check the connection's status
             if response.status_code == 200:
@@ -60,7 +60,7 @@ def registry_download_plugin(url: str) -> str:
     payload = {
         "url": url
     }
-    response = requests.post(f"{registry_url}/download", json=payload)
+    response = requests.post(f"{registry_url}/download", json=payload, timeout=60)
     plugin_zip_path = f"/tmp/{url.split('/')[-1]}.zip"
     with open(plugin_zip_path, "wb") as f:
         f.write(response.content)

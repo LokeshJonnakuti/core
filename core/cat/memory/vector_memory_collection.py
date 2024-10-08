@@ -317,7 +317,7 @@ class VectorMemoryCollection():
             .aliases[0]
             .alias_name
         )
-        response = requests.get(snapshot_url_in)
+        response = requests.get(snapshot_url_in, timeout=60)
         open(snapshot_url_out, "wb").write(response.content)
         new_name = folder + alias.replace("/", "-") + ".snapshot"
         os.rename(snapshot_url_out, new_name)
