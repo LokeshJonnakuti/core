@@ -1,7 +1,6 @@
 import os
 import time
 import json
-import random
 import traceback
 from copy import deepcopy
 from typing import List, Dict, Union, Tuple
@@ -27,6 +26,7 @@ from cat.log import log
 from cat.env import get_env
 from cat.looking_glass.callbacks import NewTokenHandler
 from cat.experimental.form import CatForm, CatFormState
+import secrets
 
 
 class AgentManager:
@@ -91,7 +91,7 @@ class AgentManager:
                         "action": "{proc.name}",
                         "action_input": // Input of the action according to its description
                     }}"""
-                    list_examples += f"\nQuestion: {random.choice(proc.start_examples)}"
+                    list_examples += f"\nQuestion: {secrets.choice(proc.start_examples)}"
                     list_examples += f"\n```json\n{example_json}\n```"
                     list_examples += """```json
                     {{

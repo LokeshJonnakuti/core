@@ -1,11 +1,11 @@
 import json
 import time
 import uuid
-import random
 import pytest
 from fastapi import HTTPException
 
 from tests.utils import get_declarative_memory_contents, get_collections_names_and_point_count
+import secrets
 
 
 # all good memory upload
@@ -101,7 +101,7 @@ def get_fake_memory_export(embedder_name="DumbEmbedder", dim=2367):
                     "when": time.time()
                 },
                 "id": str(uuid.uuid4()),
-                "vector": [random.random() for _ in range(dim)]
+                "vector": [secrets.SystemRandom().random() for _ in range(dim)]
             }]
         }
     }
